@@ -1,0 +1,125 @@
+// Blankwork SCSS Grid System
+// Inspired by semantic.gs and 960.gs
+// Version 1.0 alpha
+
+// Main Variables:
+// I'm placing an underscore before each variable
+// because I'm using rather generic names
+// I'm using the underscore
+// to avoid any accidents:
+$_columns: 12;      // Total number of columns
+$_column-width: 60px;   // Width of a single column
+$_gutter: 20px;     // Width of the gutter
+
+// Calculate the total width:
+$_width: $_columns * ($_column-width + $_gutter);
+
+
+// A Function to calculate width:
+// Example usage: (based on default values)
+// get_width(3, false) would return 240px
+// get_width(3) or get_width(3, true) would return 220px;
+// and plain get_width() or get_width would return 940px;
+
+@function get_width($columns:$_columns, $onlyInner: true)
+{
+  // First set a default return value 
+  $return: ($_column-width + $_gutter) * $columns !default;
+
+  // If we want to get only the inner width (without gutter)
+  @if $onlyInner == true
+  {
+    // Return the total calculated width, without the margins
+    // If the second parameter of this function is not specified
+    // This is what is going to be returned
+    $return: ($_column-width + $_gutter) * $columns - $_gutter;
+  }
+
+  @return $return;
+}
+
+// ClearFix Mixin
+// Thanks to http://nicolasgallagher.com/micro-clearfix-hack/
+  @mixin clearfix {
+    *zoom:1;
+    &:before, &:after
+    {
+      content: "";
+      display:table;
+    }
+
+    &:after
+    {
+      clear:both;
+    }
+  }
+
+
+// Column Mixin:
+// We're defining the default values as follows:
+// Default Column Count: Max Column Count
+// Padding (explained below): 0
+// Margin is the gutter width, but can be overridden 
+@mixin column($columns: $_columns, $padding:0, $margin:$_gutter)
+{
+  // Default Properties for a column:
+  display:inline;
+  float:left;
+  margin:0 ($margin / 2); // 0 from top, half of the gutter to the left, half to the right
+
+    $getWidth: get_width($columns); // Use the width calculation function to get the width
+    
+    // We need flexebility. So for example I have a div block, with 20px padding 
+    //on each side. That is going to give me +40px of the width
+    // That would break my grid
+    // So we would use 
+    // @include column(3, 40px);
+    // we would get back so much width
+    // that we would have space for the padding now. 
+    // It is a good idea to keep the padding and border in variables
+    // So you could do: 
+    // @include column(3, ($padding + $border) * 2);
+        // Note: The reason we don't do a *2 in here is because
+        // Sometimes you might have padding: 0 10px 0 13px;
+        // *2 would produce 20 or 26px, instead of 23
+    $columnWidth: $getWidth - $padding;
+    width: $columnWidth;
+}
+
+// Finally, we need a wrapper for our columns. 
+// This typically is a main content wrapper, 
+// But just in case someone finds an alternative use of this, 
+// we should have the flexibility
+// So wrapper( column count, center?, subtract)
+@mixin wrapper($columns: $_columns, $center:true, $subtract:0)
+{
+  // Because this is a wrapper, we don't need the outer gutter - we need the full width
+  $getWrapperWidth: get_width($columns, false);
+  // In case there is a need to subtract the wrapper
+  $wrapperWidth: $getWrapperWidth - $subtract;
+  width:$wrapperWidth;
+
+  // If we want the wrapper to be centered (by default we do)
+  @if $center == true
+  {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+// And clear the mess afterwards:
+@include clearfix;
+
+}
+
+
+// To be able to use columns inside another element,
+// You need to set that element to be a container (of how many columns)
+// So: @include container(x_number_of_columns)
+@mixin container($columns:$_columns, $padding:0)
+{
+  display:inline;
+  float:left;
+      $getWidth: get_width($columns, false); // Use the width calculation function to get 
+    $columnWidth: $getWidth - $padding;
+    width: $columnWidth;
+}
