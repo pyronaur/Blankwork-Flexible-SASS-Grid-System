@@ -1,15 +1,11 @@
-// Blankwork SCSS Grid System
-// Inspired by semantic.gs and 960.gs
-// Version 1.0 alpha
-
 // Main Variables:
 // I'm placing an underscore before each variable
 // because I'm using rather generic names
 // I'm using the underscore
 // to avoid any accidents:
-$_columns: 12;      // Total number of columns
-$_column-width: 60px;   // Width of a single column
-$_gutter: 20px;     // Width of the gutter
+$_columns: 12 !default;      // Total number of columns
+$_column-width: 60px !default;   // Width of a single column
+$_gutter: 20px !default;     // Width of the gutter
 
 // Calculate the total width:
 $_width: $_columns * ($_column-width + $_gutter);
@@ -21,18 +17,18 @@ $_width: $_columns * ($_column-width + $_gutter);
 // get_width(3) or get_width(3, true) would return 220px;
 // and plain get_width() or get_width would return 940px;
 
-@function get_width($columns:$_columns, $onlyInner: true)
+@function get_width($columns:$_columns, $onlyInnerWidth: true, $_subtract:0)
 {
   // First set a default return value 
-  $return: ($_column-width + $_gutter) * $columns !default;
+  $return: ($_column-width + $_gutter) * $columns - $_subtract !default;
 
   // If we want to get only the inner width (without gutter)
-  @if $onlyInner == true
+  @if $onlyInnerWidth == true
   {
     // Return the total calculated width, without the margins
     // If the second parameter of this function is not specified
     // This is what is going to be returned
-    $return: ($_column-width + $_gutter) * $columns - $_gutter;
+    $return: ($_column-width + $_gutter) * $columns - $_gutter - $_subtract;
   }
 
   @return $return;
@@ -60,14 +56,50 @@ $_width: $_columns * ($_column-width + $_gutter);
 // Default Column Count: Max Column Count
 // Padding (explained below): 0
 // Margin is the gutter width, but can be overridden 
-@mixin column($columns: $_columns, $padding:0, $margin:$_gutter)
+@mixin column($columns: $_columns, $_subtract:0, $_offset: null, $gutter:$_gutter)
 {
   // Default Properties for a column:
   display:inline;
   float:left;
-  margin:0 ($margin / 2); // 0 from top, half of the gutter to the left, half to the right
+   $getWidth: get_width($columns, true, $_subtract); // Use the width calculation function to get the width 
 
-    $getWidth: get_width($columns); // Use the width calculation function to get the width
+    @if $gutter != 0 
+    {
+        // Check for Alpha (a, first, f);
+        @if $_offset == alpha {
+          margin-left: -($gutter / 2);margin-right:$gutter/2;
+        } 
+        @else if $_offset == a {
+          margin-right: ($gutter / 2);margin-left:0;
+        }
+        @else if $_offset == first {
+          margin-right: ($gutter / 2);margin-left:0;
+        }
+        @else if $_offset == f {
+          margin-right: ($gutter / 2);margin-left:0;
+        }
+
+        // Check for Alpha (a, first, f);
+        @else if $_offset == omega {
+          margin-right: -($gutter / 2);margin-left:$gutter/2;
+        }
+        @else if $_offset == o {
+          margin-left: ($gutter / 2);margin-right:0;
+        }
+        @else if $_offset == last {
+          margin-left: ($gutter / 2);margin-right:0;
+        }
+        @else if $_offset == l {
+          margin-left: ($gutter / 2);margin-right:0;
+        }
+
+        @else {
+        margin-left: ($gutter / 2); 
+        margin-right: ($gutter / 2);
+      
+        }
+    }
+  
     
     // We need flexebility. So for example I have a div block, with 20px padding 
     //on each side. That is going to give me +40px of the width
@@ -82,21 +114,21 @@ $_width: $_columns * ($_column-width + $_gutter);
         // Note: The reason we don't do a *2 in here is because
         // Sometimes you might have padding: 0 10px 0 13px;
         // *2 would produce 20 or 26px, instead of 23
-    $columnWidth: $getWidth - $padding;
-    width: $columnWidth;
+    
+    width: $getWidth;
 }
 
 // Finally, we need a wrapper for our columns. 
 // This typically is a main content wrapper, 
 // But just in case someone finds an alternative use of this, 
-// we should have the flexibility
-// So wrapper( column count, center?, subtract)
-@mixin wrapper($columns: $_columns, $center:true, $subtract:0)
+// we shouldhave the flexibility
+// So wrapper( column count, center ?, subtract)
+@mixin wrapper($columns: $_columns, $center:true, $_subtract:0)
 {
   // Because this is a wrapper, we don't need the outer gutter - we need the full width
   $getWrapperWidth: get_width($columns, false);
   // In case there is a need to subtract the wrapper
-  $wrapperWidth: $getWrapperWidth - $subtract;
+  $wrapperWidth: $getWrapperWidth - $_subtract;
   width:$wrapperWidth;
 
   // If we want the wrapper to be centered (by default we do)
@@ -112,14 +144,15 @@ $_width: $_columns * ($_column-width + $_gutter);
 }
 
 
+
 // To be able to use columns inside another element,
 // You need to set that element to be a container (of how many columns)
 // So: @include container(x_number_of_columns)
-@mixin container($columns:$_columns, $padding:0)
+@mixin container($columns:$_columns, $_subtract:0, $_superChild: false)
 {
   display:inline;
   float:left;
-      $getWidth: get_width($columns, false); // Use the width calculation function to get 
-    $columnWidth: $getWidth - $padding;
+    $getWidth: get_width($columns, $_superChild); // Use the width calculation function to get 
+    $columnWidth: $getWidth - $_subtract;
     width: $columnWidth;
 }
