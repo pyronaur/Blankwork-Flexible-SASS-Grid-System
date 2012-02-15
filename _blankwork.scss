@@ -79,7 +79,7 @@ $_width: $_columns * ($_column-width + $_gutter);
           margin-right: ($gutter / 2);margin-left:0;
         }
 
-        // Check for Alpha (a, first, f);
+        // Check for Omega (o, l, last);
         @else if $_offset == omega {
           margin-right: -($gutter / 2);margin-left:$gutter/2;
         }
@@ -92,6 +92,13 @@ $_width: $_columns * ($_column-width + $_gutter);
         @else if $_offset == l {
           margin-left: ($gutter / 2);margin-right:0;
         }
+        // No Margins
+        @else if $_offset == full {
+          $getWidth: $getWidth + $gutter;
+        } 
+        @else if $_offset == none {
+          $getWidth: $getWidth + $gutter;
+        }
 
         @else {
         margin-left: ($gutter / 2); 
@@ -99,22 +106,7 @@ $_width: $_columns * ($_column-width + $_gutter);
       
         }
     }
-  
-    
-    // We need flexebility. So for example I have a div block, with 20px padding 
-    //on each side. That is going to give me +40px of the width
-    // That would break my grid
-    // So we would use 
-    // @include column(3, 40px);
-    // we would get back so much width
-    // that we would have space for the padding now. 
-    // It is a good idea to keep the padding and border in variables
-    // So you could do: 
-    // @include column(3, ($padding + $border) * 2);
-        // Note: The reason we don't do a *2 in here is because
-        // Sometimes you might have padding: 0 10px 0 13px;
-        // *2 would produce 20 or 26px, instead of 23
-    
+
     width: $getWidth;
 }
 
@@ -148,11 +140,24 @@ $_width: $_columns * ($_column-width + $_gutter);
 // To be able to use columns inside another element,
 // You need to set that element to be a container (of how many columns)
 // So: @include container(x_number_of_columns)
-@mixin container($columns:$_columns, $_subtract:0, $_superChild: false)
+@mixin container($columns:$_columns, $_subtract:0)
 {
   display:inline;
   float:left;
-    $getWidth: get_width($columns, $_superChild); // Use the width calculation function to get 
+    $getWidth: get_width($columns, false); // Use the width calculation function to get 
     $columnWidth: $getWidth - $_subtract;
     width: $columnWidth;
+}
+// Container Alias
+@mixin fullwidth($columns:$_columns, $_subtract:0) { 
+  @include container($columns, $_subtract) 
+}
+
+
+@mixin alpha {
+  margin-left:0;
+}
+
+@mixin omega {
+  margin-right:0;
 }
