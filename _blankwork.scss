@@ -56,7 +56,7 @@ $_width: $_columns * ($_column-width + $_gutter);
 // Default Column Count: Max Column Count
 // Padding (explained below): 0
 // Margin is the gutter width, but can be overridden 
-@mixin column($columns: $_columns, $_subtract:0, $_offset: null, $gutter:$_gutter)
+@mixin column($columns: $_columns, $_subtract:0, $_offset: false, $gutter:$_gutter)
 {
   // Default Properties for a column:
   display:inline;
