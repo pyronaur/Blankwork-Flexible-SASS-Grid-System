@@ -1,0 +1,64 @@
+@import config
+@import helpers
+@import widths
+@import grid
+@import push
+@import pull
+
+
+// Setup: Basic Grid
++grid-setup()
+
+@if $responsive == true
+	// Setup: palm
+	+media-query(palm)
+		+grid_setup("palm-")
+
+	// Setup: lap	
+	+media-query(lap)
+		+grid_setup("lap-")
+
+	// Setup: portable	
+	+media-query(portable)
+		+grid_setup("portable-")
+
+	// Setup: desk	
+	+media-query(desk)
+		+grid_setup("desk-")
+
+
++pull-setup()
+
+@if $responsive_pull == true
+	+media-query(palm)
+		+pull_setup("palm-")
+
+	// Setup: lap	
+	+media-query(lap)
+		+pull_setup("lap-")
+
+	// Setup: portable	
+	+media-query(portable)
+		+pull_setup("portable-")
+
+	// Setup: desk	
+	+media-query(desk)
+		+pull_setup("desk-")
+
++push-setup()
+
+@if $responsive_push == true
+	+media-query(palm)
+		+push_setup("palm-")
+
+	// Setup: lap	
+	+media-query(lap)
+		+push_setup("lap-")
+
+	// Setup: portable	
+	+media-query(portable)
+		+push_setup("portable-")
+
+	// Setup: desk	
+	+media-query(desk)
+		+push_setup("desk-")

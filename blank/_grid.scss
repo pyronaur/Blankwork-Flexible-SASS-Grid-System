@@ -1,0 +1,36 @@
+#{$prefix_type}grid-wrapper {
+    // /**
+    //  * Negative margin to negate the padding on the first grid child. 
+     // */
+    margin-left: -$padding;
+    // /**
+    //  * The following declarations allow us to use the wrapper class on lists.
+    //  */
+    list-style:none;
+    margin-bottom:0;
+    @extend .cf;
+}
+
+
+// /**
+//  * Very infrequently occuring grid wrappers as children of grid wrappers.
+//  */
+#{$prefix_type}grid-wrapper > #{$prefix_type}grid-wrapper, #{$prefix_type}direct-child-wrapper{
+    margin-left:0;
+}
+    
+    
+// /**
+//  * Column
+//  * 
+//  * Shorthand and verbose
+//  */
+#{$prefix_type}column {
+    float:left;
+    padding-left: $padding;
+    @if $global-border-box == false{
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}

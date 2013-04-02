@@ -1,0 +1,83 @@
+// /* -----------------------------------*/
+// /* 		Grid values by Numbers
+// /* -----------------------------------*/
+// I happen to like numbers instead of words. Sure. I like words too, especially when doing classes,
+// But when I write code, I'd prefer to @include lap(5) instead of @extend .lap--five-twelfths;
+// That's why this config is here
+// Basically this tells Sass what number is what class, if you do mess with it:
+// BE VERY VERY CAREFUL AND READ THE TEXT ABOVE (sorry for shouting, but it is !important)
+$column_map: (
+100 "one-whole",
+50 "one-half"
+);
+
+
+$column_map_3: (
+33 "one-third",
+66.66 "two-thirds"
+);
+
+
+$column_map_4: (
+25 "one-fourth",
+"one-half" "two-fourths",
+75 "three-fourths"
+);
+
+
+$column_map_5: (
+20 "one-fifth",
+40 "two-fifths",
+60 "three-fifths",
+80 "four-fifths"
+);
+
+$column_map_6: (
+16.666 "one-sixth",
+"one-fourth" "two-sixths",
+"one-half" "three-sixths",
+"three-fourths" "four-sixths",
+83.333 "five-sixths"
+);
+
+$column_map_8: (
+12.5 "one-eighth",
+"one-fourth" "two-eighths",
+37.5 "three-eighths",
+"one-half" "four-eighths",
+62.5 "five-eighths",
+"three-fourths" "six-eighths",
+87.5 "seven-eighths"
+);
+
+
+$column_map_10: (
+10 "one-tenth",
+"one-fifth" "two-tenths",
+30 "three-tenths",
+"two-fifths" "four-tenths",
+"one-half" "five-tenths",
+"three-fifths" "six-tenths",
+70 "seven-tenths",
+"four-fifths" "eight-tenths",
+90 "nine-tenths"
+);
+
+
+$column_map_12: (
+8.333 "one-twelfth",
+"one-sixth" "two-twelfths",
+"one-fourth" "three-twelfths",
+"one-third" "four-twelfths",
+41.666 "five-twelfths",
+"one-half" "six-twelfths",
+58.333 "seven-twelfths",
+"two-thirds" "eight-twelfths",
+"three-fourths" "nine-twelfths",
+"five-sixths" "ten-twelfths",
+91.666 "eleven-twelfths"
+);
+
+
+
+

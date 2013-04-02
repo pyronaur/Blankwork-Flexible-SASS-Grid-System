@@ -1,0 +1,26 @@
+// /* -----------------------------------*/
+// /*         Widths
+// /* -----------------------------------*/
+// /**
+//  * Sizes in human readable format. These are used in conjunction with other
+//  * objects and abstractions found in inuit.css, most commonly the grid system
+//  * and faux flexbox.
+//  *
+// * We have a mixin to generate our widths and their breakpoint-specific
+//  * variations.
+//  */
+
+
+
+@mixin grid-setup($namespace: "", $prefix: $prefix_type) {
+
+    @include widths_from_map($column_map, $namespace, $prefix);
+    @include widths_from_map($column_map_3, $namespace, $prefix);
+    @include widths_from_map($column_map_4, $namespace, $prefix);
+    @include widths_from_map($column_map_5, $namespace, $prefix);
+    @include widths_from_map($column_map_6, $namespace, $prefix);
+    @include widths_from_map($column_map_8, $namespace, $prefix);
+    @include widths_from_map($column_map_10, $namespace, $prefix);
+    @include widths_from_map($column_map_12, $namespace, $prefix);
+
+}

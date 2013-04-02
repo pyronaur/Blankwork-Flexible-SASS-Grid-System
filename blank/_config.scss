@@ -1,0 +1,106 @@
+// Column maps can help you find burried treasure
+// They also can turn Numbers to Words and vice versa
+@import "column_maps";
+
+
+// -----------------------------------*/
+// 		Misc:
+// -----------------------------------*/
+$use_sass_placeholders: true;
+
+
+// -----------------------------------*/
+// 		Responsiveness
+// -----------------------------------*/
+
+$responsive: true !default;
+
+// Default Maps
+$desk_map: $column_map_12 !default;
+$portable_map: $column_map_10 !default;
+$lap_map: $column_map_10 !default;
+$palm_map: $column_map_10 !default;
+
+// 
+// Responsiveness for widescreen/high resolution desktop monitors and beyond?
+// Note: $responsive parameter above must be enabled before enabling this.
+//
+// $responsive-extra: false !default;
+
+// 
+// Responsive push and pull produce a LOT of code, only turn them on if you
+// definitely need them.
+//
+$responsive-push: true !default;
+$responsive-pull: true !default;
+
+$lap-start: 481px !default;
+$desk-start: 1024px !default;
+$desk-wide-start: 1200px !default;
+
+
+// 
+// Define your breakpoints. The first value is the prefix that shall be used for
+// your classes (e.g. `.palm--one-half`), the second value is the media query
+// that the breakpoint fires at.
+//
+$breakpoints: (
+    'palm' '(max-width: 480px)',
+    'lap' '(min-width: 481px) and (max-width: 1023px)',
+    'portable' '(max-width: 1023px)',
+    'desk' '(min-width: 1024px)'
+);
+
+
+// 
+// Define which namespaced breakpoints you would like to generate for each of
+// widths, push and pull. This is handy if you only need pull on, say, desk, or
+// you only need a new width breakpoint at mobile sizes. It allows you to only
+// compile as much CSS as you need. All are turned on by default, but you can
+// add and remove breakpoints at will.
+//
+// Push and pull shall only be used if `$push` and/or `$pull` and `$responsive`
+// have been set to true
+//
+$breakpoint-has-widths: ('palm', 'lap', 'portable', 'desk');
+$breakpoint-has-push: ('palm', 'lap', 'portable', 'desk');
+$breakpoint-has-pull: ('palm', 'lap', 'portable', 'desk');
+
+
+
+
+
+// -----------------------------------*/
+// 		Spacing
+// -----------------------------------*/
+$padding: 24px !default;
+$global-border-box: true !default;
+
+$prefix_type: if($use_sass_placeholders, unquote("%"), unquote("."));
+
+
+
+
+
+// -----------------------------------*/
+// Enable Additional Class Names ? 
+// Useful for when generating a grid system for someobody to use on the HTML Side
+// -----------------------------------*/	
+$enable_eighths:  true !default;
+$enable_tenths:   true !default;
+
+
+
+// -------------------------------------*/
+// 		 You! Shall! Not! Paaaas!
+//  I mean it. Don't edit below this line
+// -------------------------------------*/
+
+// Default Columns
+$max_desk_columns: length($desk_map) + 1;
+$max_portable_columns: length($portable_map) + 1;
+$max_lap_columns: length($lap_map) + 1;
+$max_palm_columns: length($palm_map) + 1;
+
+
+
