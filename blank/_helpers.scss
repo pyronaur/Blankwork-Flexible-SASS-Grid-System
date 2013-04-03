@@ -61,8 +61,8 @@
     }
     
     $column_information: nth($column_map, $columns);
-    $column_name: nth($column_information, 1);
-    @return $column_name;
+    $width: nth($column_information, 1);
+    @return $width;
 }
 
 
@@ -88,66 +88,6 @@
 }
 
 
-
-// @mixin column($columns: 12, $class: false, $column_map: $desk_map) {
-//     @if $class != false {
-//         $class: "#{$class}-"; // Add the dash
-//     } 
-//     @else {
-//         $class: "";
-//     }
-
-//     $column_class: get_name($column_map, $columns);
-
-//     @extend #{$prefix-type}#{$class}#{$column_class};
-//     @extend #{$prefix_type}column;
-// }
-
-@mixin palm($columns: $max_palm_columns) {
-    @if $columns > $max_palm_columns{
-        @warn "You passed in #{$columns} columns, but you can't have more than #{$max_palm_columns} with the current map that you've set!";
-    }
-    @include column($columns, palm, $palm_map);
-}
-@mixin lap($columns: $max_lap_columns) {
-    @if $columns > $max_lap_columns{
-        @warn "You passed in #{$columns} columns, but you can't have more than #{$max_lap_columns} with the current map that you've set!";
-    }
-    @include column($columns, lap, $lap_map);
-}
-@mixin portable($columns: $max_palm_columns) {
-    @if $columns > $max_portable_columns{
-        @warn "You passed in #{$columns} columns, but you can't have more than #{$max_portable_columns} with the current map that you've set!";
-    }
-    @include column($columns, portable, $portable_map);
-}
-@mixin desk($columns: $max_desk_columns) {
-    @if $columns > $max_desk_columns{
-        @warn "You passed in #{$columns} columns, but you can't have more than #{$max_desk_columns} with the current map that you've set!";
-    }
-    @include column($columns, desk, $desk_map);
-}
-
-
-
-
-// /* -----------------------------------*/
-// /*         Wrappers
-// /* -----------------------------------*/
-
-@mixin wrapper($direct_child: false) {
-    @extend #{$prefix_type}grid-wrapper;
-    
-    @if $direct_child != false {
-        @extend #{$prefix_type}grid-wrapper;
-    }
-}
-
-// A wrapper is also a container
-// A matter of preference
-@mixin container($args...) {
-    @include wrapper;
-}
 
 
 /* ---------------------------------------*/
