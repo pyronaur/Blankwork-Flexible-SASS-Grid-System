@@ -7,6 +7,7 @@
 // 		Misc:
 // -----------------------------------*/
 $use_sass_placeholders: true;
+$allow_split_grids: true; // Allow +column(1/3) in addition of column(4) for four-twelfths
 
 
 // -----------------------------------*/
@@ -47,6 +48,7 @@ $desk-wide-start: 1200px !default;
 $breakpoints: (
     'palm' '(max-width: 480px)',
     'lap' '(min-width: 481px) and (max-width: 1023px)',
+    'lap-and-up' '(min-width: 481px)',
     'portable' '(max-width: 1023px)',
     'desk' '(min-width: 1024px)'
 );
@@ -73,7 +75,7 @@ $breakpoint-has-pull: ('palm', 'lap', 'portable', 'desk');
 // -----------------------------------*/
 // 		Spacing
 // -----------------------------------*/
-$padding: 24px !default;
+$blankwork_padding: 24px !default;
 $global-border-box: true !default;
 
 $prefix_type: if($use_sass_placeholders, unquote("%"), unquote("."));
