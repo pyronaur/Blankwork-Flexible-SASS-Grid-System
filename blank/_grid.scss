@@ -2,18 +2,26 @@
 // /* -----------------------------------*/
 // /*              CLASSES
 // /* -----------------------------------*/
-    
+#{$prefix_type}cf{
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+
+ 
 #{$prefix_type}grid-wrapper {
     // /**
     //  * Negative margin to negate the padding on the first grid child. 
      // */
-    margin-left: -$padding;
+    margin-left: -$blankwork_padding;
     // /**
     //  * The following declarations allow us to use the wrapper class on lists.
     //  */
     list-style:none;
     margin-bottom:0;
-    @extend .cf;
+    @extend #{$prefix_type}cf;
 }
 
 
@@ -32,7 +40,7 @@
 //  */
 #{$prefix_type}column {
     float:left;
-    padding-left: $padding;
+    padding-left: $blankwork_padding;
     @if $global-border-box == false{
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
