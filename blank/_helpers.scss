@@ -94,9 +94,8 @@
         width: $columns;
     }
 
-    @extend #{$prefix_type}column;
+    @extend #{$prefix_type}#{$class}column;
 }
-
 
 
 

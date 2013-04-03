@@ -16,21 +16,26 @@
 +grid-setup()
 
 @if $responsive == true
-	// Setup: palm
-	+media-query(palm)
-		+grid_setup("palm-")
-
-	// Setup: lap	
-	+media-query(lap)
-		+grid_setup("lap-")
-
-	// Setup: portable	
-	+media-query(portable)
-		+grid_setup("portable-")
-
 	// Setup: desk	
 	+media-query(desk)
 		+grid_setup("desk-")
+	
+	// // Setup: portable	
+	+media-query(portable)
+		+grid_setup("portable-")
+
+	// // Setup: palm
+	+media-query(palm)
+		+grid_setup("palm-")
+
+	// // Setup: lap	
+	+media-query(lap)
+		+grid_setup("lap-")
+	
+
+
+
+
 
 
 +pull-setup()

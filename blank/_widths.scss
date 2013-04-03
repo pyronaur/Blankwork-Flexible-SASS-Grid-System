@@ -13,7 +13,7 @@
 
 
 @mixin grid-setup($namespace: "", $prefix: $prefix_type) {
-
+	@include column_setup($namespace, $prefix);
     @include widths_from_map($column_map, $namespace, $prefix);
     @include widths_from_map($column_map_3, $namespace, $prefix);
     @include widths_from_map($column_map_4, $namespace, $prefix);

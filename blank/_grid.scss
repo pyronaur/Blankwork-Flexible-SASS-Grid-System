@@ -38,15 +38,18 @@
 //  * 
 //  * Shorthand and verbose
 //  */
-#{$prefix_type}column {
-    float:left;
-    padding-left: $blankwork_padding;
-    @if $global-border-box == false{
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+@mixin column-setup($namespace, $prefix) {
+    #{$prefix}#{$namespace}column {
+        float:left;
+        padding-left: $blankwork_padding;
+        @if $global-border-box == false{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
     }
 }
+
 
 
 

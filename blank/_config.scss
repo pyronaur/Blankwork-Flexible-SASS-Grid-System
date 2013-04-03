@@ -6,7 +6,7 @@
 // -----------------------------------*/
 // 		Misc:
 // -----------------------------------*/
-$use_sass_placeholders: true;
+$use_sass_placeholders: true !default;
 $allow_split_grids: true; // Allow +column(1/3) in addition of column(4) for four-twelfths
 
 
@@ -18,9 +18,9 @@ $responsive: true !default;
 
 // Default Maps
 $desk_map: $column_map_12 !default;
-$portable_map: $column_map_12 !default;
-$lap_map: $column_map_12 !default;
-$palm_map: $column_map_12 !default;
+$portable_map: $column_map_10 !default;
+$lap_map: $column_map_10 !default;
+$palm_map: $column_map_6 !default;
 
 // 
 // Responsiveness for widescreen/high resolution desktop monitors and beyond?
@@ -78,8 +78,11 @@ $breakpoint-has-pull: ('palm', 'lap', 'portable', 'desk');
 $blankwork_padding: 24px !default;
 $global-border-box: true !default;
 
-$prefix_type: if($use_sass_placeholders, unquote("%"), unquote("."));
 
+@if($use_sass_placeholders == false) {
+	$prefix_type: unquote(".");
+}
+$prefix_type: unquote("%") !default;
 
 
 
