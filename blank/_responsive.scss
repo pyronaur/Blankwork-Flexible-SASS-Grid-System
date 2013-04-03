@@ -37,14 +37,14 @@
     @if $columns > $max_palm_columns{
         @warn "You passed in #{$columns} columns, but you can't have more than #{$max_palm_columns} with the current map that you've set!";
     }
-    @include column($columns, palm, $palm_map);
+    @include col($columns, palm, $palm_map);
 }
 
 @mixin lap($columns: $max_lap_columns) {
     @if $columns > $max_lap_columns{
         @warn "You passed in #{$columns} columns, but you can't have more than #{$max_lap_columns} with the current map that you've set!";
     }
-    @include column($columns, lap, $lap_map);
+    @include col($columns, lap, $lap_map);
 }
 
 
@@ -52,7 +52,7 @@
     @if $columns > $max_portable_columns{
         @warn "You passed in #{$columns} columns, but you can't have more than #{$max_portable_columns} with the current map that you've set!";
     }
-    @include column($columns, portable, $portable_map);
+    @include col($columns, portable, $portable_map);
 }
 
 
@@ -60,5 +60,5 @@
     @if $columns > $max_desk_columns{
         @warn "You passed in #{$columns} columns, but you can't have more than #{$max_desk_columns} with the current map that you've set!";
     }
-    @include column($columns, desk, $desk_map);
+    @include col($columns, desk, $desk_map);
 }
