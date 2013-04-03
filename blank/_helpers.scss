@@ -1,44 +1,16 @@
 // 
-// These mixins are for the library to use only, you should not need to modify
-// them at all.
-// *
-// Enclose a block of code with a media query as named in `$breakpoints`.
-@mixin media-query($media-query){
-    $breakpoint-found: false;
-
-    @each $breakpoint in $breakpoints{
-        // This is a loop, no need to do all that other stuff if the breakpoint was already found
-        @if $breakpoint_found != true {       
-            
-            $name: nth($breakpoint, 1);
-            $declaration: nth($breakpoint, 2);
-
-            @if $media-query == $name and $declaration{
-                $breakpoint-found: true;
-
-                @media only screen and #{$declaration} {
-                    @content;
-                }
-            }
-        }
-    } // end @each;
-
-    @if $breakpoint-found == false{
-        @warn "Breakpoint ‘#{$media-query}’ does not exist"
-    }
-}
-
-
-// 
 // Drop relative positioning into silent classes which can’t take advantage of
 // the `[class*="push--"]` and `[class*="pull--"]` selectors.
-
+// 
 @mixin silent-relative() {
-    @if $use_sass_placeholders == true{
+    @if $use_sass_placeholders == true {
         position:relative;
     }
 }
 
+// /* -----------------------------------*/
+// /*  Translate Number to Name
+// /* -----------------------------------*/
 @function get_name($column_map, $columns) {
     // We don't have "one-whole" in Source Maps
     // Thereby a map for 12 columns contains only 11 items
@@ -53,6 +25,15 @@
     @return $column_name;
 }
 
+
+// /* -----------------------------------*/
+// /*  Translate Number to Width
+// /* -----------------------------------*/
+
+// NOT FOR PUBLIC USE.
+// It won't return all withs, it may return a string with the class name instead
+// It's okay for the Grid and Column generating functions for now
+// But definitely needs a little revamp.
 @function get_width($column_map, $columns) {
     // Same as with get_col_name
     // Only this time we're returning 100% in that special case

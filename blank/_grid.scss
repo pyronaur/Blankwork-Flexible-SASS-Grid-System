@@ -1,3 +1,8 @@
+
+// /* -----------------------------------*/
+// /*              CLASSES
+// /* -----------------------------------*/
+    
 #{$prefix_type}grid-wrapper {
     // /**
     //  * Negative margin to negate the padding on the first grid child. 
@@ -33,4 +38,24 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
+}
+
+
+
+// /* -----------------------------------*/
+// /*            MIXINS
+// /* -----------------------------------*/
+
+@mixin wrapper($direct_child: false) {
+    @extend #{$prefix_type}grid-wrapper;
+    
+    @if $direct_child != false {
+        @extend #{$prefix_type}grid-wrapper;
+    }
+}
+
+// A wrapper is also a container
+// A matter of preference
+@mixin container($args...) {
+    @include wrapper;
 }
