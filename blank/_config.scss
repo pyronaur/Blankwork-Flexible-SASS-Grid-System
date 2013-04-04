@@ -53,7 +53,7 @@ $lap-end: $desk-start - 1px !default;
 //
 $breakpoints: (
     "palm" "(max-width: #{$palm-end})",
-    "lap" "(min-width: #{$lap-start}) and (max-width: #{lap-end})",
+    "lap" "(min-width: #{$lap-start}) and (max-width: #{$lap-end})",
     "lap-and-up" "(min-width: #{$lap-start})",
     "portable" "(max-width: #{$lap-end})",
     "desk" "(min-width: #{$desk-start})"
