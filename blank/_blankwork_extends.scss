@@ -1,0 +1,72 @@
+
+// /* -----------------------------------*/
+// /*              CLASSES
+// /* -----------------------------------*/
+#{$prefix_type}cf{
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+
+ 
+#{$prefix_type}grid-wrapper {
+    // /**
+    //  * Negative margin to negate the padding on the first grid child. 
+     // */
+    margin-left: -$blankwork_padding;
+    // /**
+    //  * The following declarations allow us to use the wrapper class on lists.
+    //  */
+    list-style:none;
+    margin-bottom:0;
+    @extend #{$prefix_type}cf;
+}
+
+
+// /**
+//  * Very infrequently occuring grid wrappers as children of grid wrappers.
+//  */
+#{$prefix_type}grid-wrapper > #{$prefix_type}grid-wrapper, #{$prefix_type}direct-child-wrapper{
+    margin-left:0;
+}
+    
+    
+// /**
+//  * Column
+//  * 
+//  * Shorthand and verbose
+//  */
+@mixin column-setup($namespace, $prefix) {
+    #{$prefix}#{$namespace}column {
+        float:left;
+        padding-left: $blankwork_padding;
+        @if $global-border-box == false{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
+}
+
+
+
+
+// /* -----------------------------------*/
+// /*            MIXINS
+// /* -----------------------------------*/
+
+@mixin wrapper($direct_child: false) {
+    @extend #{$prefix_type}grid-wrapper;
+    
+    @if $direct_child != false {
+        @extend #{$prefix_type}grid-wrapper;
+    }
+}
+
+// A wrapper is also a container
+// A matter of preference
+@mixin container($args...) {
+    @include wrapper;
+}

@@ -1,10 +1,10 @@
 @import config
-@import responsive
-@import helpers
-@import widths
+@import blankwork_extends
 @import grid
+@import helpers
 @import push
 @import pull
+@import responsive
 
 
 *
@@ -13,63 +13,61 @@
 	box-sizing: border-box
 
 // Setup: Basic Grid
-+grid-setup()
++bw_grid_setup()
 
 @if $responsive == true
-	// Setup: desk	
-	+media-query(desk)
-		+grid_setup("desk-")
-	
-	// // Setup: portable	
-	+media-query(portable)
-		+grid_setup("portable-")
 
 	// // Setup: palm
-	+media-query(palm)
-		+grid_setup("palm-")
+	+media(palm)
+		+bw_grid_setup("palm-")
 
 	// // Setup: lap	
-	+media-query(lap)
-		+grid_setup("lap-")
-	
+	+media(lap)
+		+bw_grid_setup("lap-")
+
+	// // Setup: portable	
+	+media(portable)
+		+bw_grid_setup("portable-")
+
+	// Setup: desk	
+	+media(desk)
+		+bw_grid_setup("desk-")
 
 
 
 
 
 
-+pull-setup()
-
++bw_pull_setup()
 @if $responsive_pull == true
-	+media-query(palm)
-		+pull_setup("palm-")
+	+media(palm)
+		+bw_pull_setup("palm-")
 
 	// Setup: lap	
-	+media-query(lap)
-		+pull_setup("lap-")
+	+media(lap)
+		+bw_pull_setup("lap-")
 
 	// Setup: portable	
-	+media-query(portable)
-		+pull_setup("portable-")
+	+media(portable)
+		+bw_pull_setup("portable-")
 
 	// Setup: desk	
-	+media-query(desk)
-		+pull_setup("desk-")
+	+media(desk)
+		+bw_pull_setup("desk-")
 
-+push-setup()
-
++bw_push_setup()
 @if $responsive_push == true
-	+media-query(palm)
-		+push_setup("palm-")
+	+media(palm)
+		+bw_push_setup("palm-")
 
 	// Setup: lap	
-	+media-query(lap)
-		+push_setup("lap-")
+	+media(lap)
+		+bw_push_setup("lap-")
 
 	// Setup: portable	
-	+media-query(portable)
-		+push_setup("portable-")
+	+media(portable)
+		+bw_push_setup("portable-")
 
 	// Setup: desk	
-	+media-query(desk)
-		+push_setup("desk-")
+	+media(desk)
+		+bw_push_setup("desk-")
