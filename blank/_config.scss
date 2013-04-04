@@ -35,9 +35,15 @@ $palm_map: $column_map_6 !default;
 $responsive-push: true !default;
 $responsive-pull: true !default;
 
-$lap-start: 481px !default;
-$desk-start: 1024px !default;
-$desk-wide-start: 1200px !default;
+$lap-start: 768px !default;
+$desk-start: 1000px !default;
+// $desk-wide-start: 1200px !default; // Unused right now
+
+$palm-end: $lap-start - 1px !default;
+$lap-end: $desk-start - 1px !default;
+
+
+
 
 
 // 
@@ -46,11 +52,11 @@ $desk-wide-start: 1200px !default;
 // that the breakpoint fires at.
 //
 $breakpoints: (
-    'palm' '(max-width: 480px)',
-    'lap' '(min-width: 481px) and (max-width: 1023px)',
-    'lap-and-up' '(min-width: 481px)',
-    'portable' '(max-width: 1023px)',
-    'desk' '(min-width: 1024px)'
+    "palm" "(max-width: #{$palm-end})",
+    "lap" "(min-width: #{$lap-start}) and (max-width: #{lap-end})",
+    "lap-and-up" "(min-width: #{$lap-start})",
+    "portable" "(max-width: #{$lap-end})",
+    "desk" "(min-width: #{$desk-start})"
 );
 
 
