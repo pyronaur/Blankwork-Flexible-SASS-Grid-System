@@ -3,21 +3,19 @@
 // /* -----------------------------------*/
 @function sanitize_columns($columns, $column_map: $desk_map) {
     
-    @if($allow-split-grids == true and $columns < 1) {
+    @if($allow_split_grids == true and $columns < 1) {
 
         $calculated_columns: ( length($column_map) + 1 ) * $columns;
-        // If we have a split value here, we have trouble
-
-        @if(round($calculated_columns) != $calculated_columns) {
-            @return false;
-        }
-        @else {
+        
+        // If a rounded number isn't the same as the actual value, it's a split value.
+        // Only return this if we have a real column
+        // Otherwise return what was passed in and let someone else deal with this.
+        @if(round($calculated_columns) == $calculated_columns) {
             @return $calculated_columns;
         }
     }
 
     @return $columns;
-
 }
 
 // 
@@ -36,17 +34,36 @@
 @function get_name($column_map, $columns) {
     $columns: sanitize_columns($columns, $column_map);
 
-    // We don't have "one-whole" in Source Maps
-    // Thereby a map for 12 columns contains only 11 items
-    // We're accounting for the 12th item here: 
-    $max_columns: length($column_map) + 1;
-    @if ( $max_columns <= $columns) {
-        @return "one-whole";
+    @if ($columns >= 1) {
+        // We don't have "one-whole" in Source Maps
+        // Thereby a map for 12 columns contains only 11 items
+        // We're accounting for the 12th item here: 
+        $max_columns: length($column_map) + 1;
+        @if ( $max_columns <= $columns) {
+            @return "one-whole";
+        }
+        
+        // Get information about this column
+        $column_information: nth($column_map, $columns);
+        $column_name: nth($column_information, 2);
+
+        @return $column_name;
     }
-    
-    $column_information: nth($column_map, $columns);
-    $column_name: nth($column_information, 2);
-    @return $column_name;
+
+    @else {
+        $width: $columns * 100;
+        @each $minimap in $column_map_all_values {
+                    $minimap_value: nth($minimap, 1);
+                    @if(round($minimap_value) == round($width)) {
+                        @return nth($minimap, 2);
+                    }
+        } // end @each
+
+        // Returning false, because it is a value < 1, which has failed in Sanitization (probabbly twice),
+        // And is not found in our "all column names" list
+        // Which means a name does not exist for this bastard!
+        @return false;
+    }
 }
 
 
@@ -81,35 +98,16 @@
         $class: unquote("#{$class}-"); // Add the dash
     } 
 
-    // If we have a split value here, we have trouble
-    @if($sanitized_columns != false) {
-        $column_class: get_name($column_map, $sanitized_columns);
+    $column_class: get_name($column_map, $sanitized_columns);
+    @if($column_class != false) {
         @extend #{$prefix-type}#{$class}#{$column_class};
     }
     @else {
-
-        @if($columns < 1){
-            $columns: $columns * 100 + 0%;
-        } 
-        width: $columns;
-    }
+            width: $columns * 100%;
+    } 
 
     @extend #{$prefix_type}#{$class}column;
 }
-
-
-
-
-@mixin push($columns: 12, $class: "", $column_map: $desk_map) {
-    @if $class != "" {
-        $class: unquote("#{$class}-"); // Add the dash
-    } 
-
-    $column_class: get_name($column_map, $columns);
-
-    @extend #{$prefix_type}#{$class}push-#{$column_class};
-}
-
 
 
 
