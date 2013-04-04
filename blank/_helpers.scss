@@ -142,10 +142,16 @@
         $class_value: get_width($map, $columns);
     
         @if type-of($class_value) == "string" {
-            #{$prefix}#{$namespace}#{$type}#{$class_name} { @extend #{$prefix}#{$namespace}#{$type}#{$class_value}; }
+            #{$prefix}#{$type}#{$namespace}#{$class_name} { 
+                @extend #{$prefix}#{$type}#{$namespace}#{$class_value};  
+                position: relative;
+             }
         }
         @else {
-            #{$prefix}#{$namespace}#{$type}#{$class_name} { #{$property}: unquote("#{$class_value}%"); @include silent-relative(); }   
+            #{$prefix}#{$type}#{$namespace}#{$class_name} { 
+                #{$property}: unquote("#{$class_value}%"); 
+                position: relative;
+             }   
         }
     }
 }

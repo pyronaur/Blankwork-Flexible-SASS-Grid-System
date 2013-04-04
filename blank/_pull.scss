@@ -5,15 +5,8 @@
 //  * pull classes, to move grid items over to the right by certain amounts.
 //  */
 
-// /**
-//  * Not a particularly great selector, but the DRYest way to do things.
-//  */
-@if $use_sass_placeholders != true {
-    [class*="pull--"]{ position:relative; }    
-}
-
 // /* -----------------------------------*/
-// /*  pull Setup Mixin
+// /*  Pull Setup Mixin
 // /* -----------------------------------*/
     
 @mixin bw_pull_setup($namespace: "", $prefix: $prefix_type) {
@@ -38,7 +31,7 @@
 
     $column_class: get_name($column_map, $columns);
 
-    @extend #{$prefix_type}#{$class}pull-#{$column_class};
+    @extend #{$prefix_type}pull-#{$class}#{$column_class};
 }
 
 // /* -----------------------------------*/
