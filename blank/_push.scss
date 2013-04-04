@@ -12,7 +12,11 @@
     [class*="push--"]{ position:relative; }    
 }
 
-@mixin push-setup($namespace: "", $prefix: $prefix_type) {
+// /* -----------------------------------*/
+// /*  Push Setup Mixin
+// /* -----------------------------------*/
+    
+@mixin bw_push_setup($namespace: "", $prefix: $prefix_type) {
     @include rules_from_map(push-, left, $column_map, $namespace, $prefix);
     @include rules_from_map(push-, left, $column_map_3, $namespace, $prefix);
     @include rules_from_map(push-, left, $column_map_4, $namespace, $prefix);
@@ -23,24 +27,56 @@
     @include rules_from_map(push-, left, $column_map_12, $namespace, $prefix);
 }
 
-@include push-setup();
+// /* -----------------------------------*/
+// /*  Push Mixin
+// /* -----------------------------------*/
+    
+@mixin push($columns: 12, $class: "", $column_map: $desk_map) {
+    @if $class != "" {
+        $class: unquote("#{$class}-"); // Add the dash
+    } 
 
-@if $responsive-push == true{
+    $column_class: get_name($column_map, $columns);
 
-@include media-query(palm){
-    @include push-setup("palm-");
+    @extend #{$prefix_type}#{$class}push-#{$column_class};
 }
 
-@include media-query(lap){
-    @include push-setup("lap-");
+// /* -----------------------------------*/
+// /*  Responsive Push
+// /* -----------------------------------*/
+    
+
+@mixin palm-push($columns: 1) {
+    @if $columns > $max_palm_columns {
+        @warn "You tried to push #{$columns} columns, but you can't have more than #{$max_palm_columns} with the current map that you've set!";
+    }
+    @include push($columns, palm, $palm_map);
 }
 
-@include media-query(portable){
-    @include push-setup("portable-");
+@mixin lap-push($columns: 1) {
+    @if $columns > $max_lap_columns {
+        @warn "You tried to push #{$columns} columns, but you can't have more than #{$max_lap_columns} with the current map that you've set!";
+    }
+    @include push($columns, lap, $lap_map);
 }
 
-@include media-query(desk){
-    @include push-setup("desk-");
+
+@mixin portable-push($columns: 1) {
+    @if $columns > $max_portable_columns {
+        @warn "You tried to push #{$columns} columns, but you can't have more than #{$max_portable_columns} with the current map that you've set!";
+    }
+    @include push($columns, portable, $portable_map);
 }
 
-} // endif
+
+@mixin desk-push($columns: 1) {
+    @if $columns > $max_desk_columns {
+        @warn "You tried to push #{$columns} columns, but you can't have more than #{$max_desk_columns} with the current map that you've set!";
+    }
+    @include push($columns, desk, $desk_map);
+}
+
+
+
+
+
