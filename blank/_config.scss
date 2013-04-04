@@ -85,10 +85,11 @@ $blankwork_padding: 24px !default;
 $global-border-box: true !default;
 
 
-@if($use_sass_placeholders == false) {
-	$prefix_type: unquote(".");
+$prefix_type: unquote(".") !default;
+@if($use_sass_placeholders == true) {
+	$prefix_type: unquote("%");
 }
-$prefix_type: unquote("%") !default;
+
 
 
 
