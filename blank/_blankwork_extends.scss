@@ -70,3 +70,14 @@
 @mixin container($args...) {
     @include wrapper;
 }
+
+
+// Backwards Compatibility 
+@if ($prefix_type == unquote(".")) {
+    .gw {
+        @extend .grid-wrapper;
+    }
+    .g, .grid, .grid__item, .grid-item {
+        @extend .column;
+    }
+}
