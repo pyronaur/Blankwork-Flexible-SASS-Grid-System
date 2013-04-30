@@ -19,8 +19,8 @@
 }
 
 // 
-// Drop relative positioning into silent classes which can’t take advantage of
-// the `[class*="push--"]` and `[class*="pull--"]` selectors.
+// Drop relative positioning into silent classes which can't take advantage of
+// the [class*="push--"] and [class*="pull--"] selectors.
 // 
 @mixin silent-relative() {
     @if $use_sass_placeholders == true {
@@ -35,7 +35,7 @@
     $columns: sanitize_columns($columns, $column_map);
 
     @if ($columns >= 1) {
-        // We don't have "one-whole" in Source Maps
+        // We don't have  one-whole  in Source Maps
         // Thereby a map for 12 columns contains only 11 items
         // We're accounting for the 12th item here: 
         $max_columns: length($column_map) + 1;
