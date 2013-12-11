@@ -1,3 +1,14 @@
+# We had a good run
+## Attention!: Blankwork is  outdated
+It's about time to kill Blankwork as a Sass Grid system. The ideas were simple and easy to grasp, but it is time you stopped using Blankwork and use something modern instead for all the responsive goodness. I would personally recommend you look at [Bourbon Neat](http://neat.bourbon.io) or [Susy](http://susy.oddbird.net)
+
+
+
+<hr>
+
+
+
+
 # Blankwork SCSS Grid
 So I've tried lots of grid systems, and still never really found what I was looking for. So I decided to try making my own, and this is my attempt.   
 Blankwork allows you to have a wrapper, container and columns at the moment.
